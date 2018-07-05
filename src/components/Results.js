@@ -1,14 +1,10 @@
 import React from 'react';
-
+import { ResultsContainer, Card } from './Styles';
 export default props => {
   const results = props.schedule.map((trip, index) => (
-    <li key={index}>
+    <Card key={index}>
       {trip['@origTimeMin']} - {trip['@destTimeMin']}
-    </li>
+    </Card>
   ));
-  return (
-    <div>
-      <ul>{results}</ul>
-    </div>
-  );
+  return <ResultsContainer>{results}</ResultsContainer>;
 };
