@@ -32,9 +32,15 @@ class App extends Component {
   handleSubmit = e => {
     e.preventDefault();
     //commence search
-    const { origin, destination, departOrArrive, time } = this.state;
+    const { origin, stations, destination, departOrArrive, time } = this.state;
     const date = moment(this.state.date).format('MM/DD/YYYY');
-    getSchedule(departOrArrive, origin, destination, date, time).then(res =>
+    getSchedule(
+      departOrArrive,
+      stations[origin].abbr,
+      stations[destination].abbr,
+      date,
+      time
+    ).then(res =>
       this.setState({ schedule: res.data.root.schedule.request.trip })
     );
   };

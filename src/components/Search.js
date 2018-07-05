@@ -6,8 +6,8 @@ import { SearchContainer, Form, FormRow, Calendar } from './Styles';
 
 const Search = props => {
   //map through each station and return option for each
-  const options = props.stations.map(station => (
-    <option key={station.abbr} value={station.abbr}>
+  const options = props.stations.map((station, index) => (
+    <option key={station.abbr} value={index}>
       {station.name}
     </option>
   ));
