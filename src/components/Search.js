@@ -4,7 +4,7 @@ import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import { SearchContainer, Form, FormRow, Calendar } from './Styles';
 
-export default props => {
+const Search = props => {
   //map through each station and return option for each
   const options = props.stations.map(station => (
     <option key={station.abbr} value={station.abbr}>
@@ -77,10 +77,7 @@ export default props => {
             <DatePicker
               selected={moment(props.date)}
               onChange={date =>
-                props.handleOptionChange(
-                  'date',
-                  moment(date._d).format('MM/DD/YYYY')
-                )
+                props.handleOptionChange('date', moment(date._d))
               }
             />
             <select
@@ -123,3 +120,5 @@ function populateTime() {
   }
   return times;
 }
+
+export default Search;

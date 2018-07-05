@@ -14,9 +14,19 @@ export const SearchContainer = styled.div`
 `;
 export const ResultsContainer = styled.div`
   width: 100%;
-  overflow: auto;
+  background: blue;
   display: flex;
   flex-direction: column;
+`;
+export const SearchInfo = styled.div`
+  height: 150px;
+  background: green;
+`;
+export const CardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  background: red;
 `;
 export const Form = styled.form`
   display: flex;

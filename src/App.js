@@ -15,7 +15,7 @@ class App extends Component {
       schedule: [],
       departOrArrive: 'depart',
       time: 'now',
-      date: moment().format('MM/DD/YYYY')
+      date: moment()
     };
   }
   componentDidMount() {
@@ -30,9 +30,10 @@ class App extends Component {
   };
 
   handleSubmit = e => {
-    //commit search
-    const { origin, destination, departOrArrive, date, time } = this.state;
     e.preventDefault();
+    //commence search
+    const { origin, destination, departOrArrive, time } = this.state;
+    const date = moment(this.state.date).format('MM/DD/YYYY');
     getSchedule(departOrArrive, origin, destination, date, time).then(res =>
       this.setState({ schedule: res.data.root.schedule.request.trip })
     );
