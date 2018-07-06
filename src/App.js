@@ -15,7 +15,8 @@ class App extends Component {
       schedule: [],
       departOrArrive: 'depart',
       time: 'now',
-      date: moment()
+      date: moment(),
+      fetching: false
     };
   }
   componentDidMount() {
@@ -34,28 +35,50 @@ class App extends Component {
     //commence search
     const { origin, stations, destination, departOrArrive, time } = this.state;
     const date = moment(this.state.date).format('MM/DD/YYYY');
-    getSchedule(
-      departOrArrive,
-      stations[origin].abbr,
-      stations[destination].abbr,
-      date,
-      time
-    ).then(res =>
-      this.setState({ schedule: res.data.root.schedule.request.trip })
-    );
+    if ((origin !== '') & (destination !== '')) {
+      getSchedule(
+        departOrArrive,
+        stations[origin].abbr,
+        stations[destination].abbr,
+        date,
+        time
+      ).then(res =>
+        this.setState({
+          schedule: res.data.root.schedule.request.trip,
+          fetching: true
+        })
+      );
+    } else {
+      alert('Please choose a departing and arrival station');
+    }
   };
 
   render() {
+    const {
+      stations,
+      departOrArrive,
+      date,
+      destination,
+      origin,
+      fetching
+    } = this.state;
     return (
       <Container>
         <Search
-          stations={this.state.stations}
+          stations={stations}
           handleOptionChange={(key, abbr) => this.handleOptionChange(key, abbr)}
           handleSubmit={this.handleSubmit}
-          selected={this.state.departOrArrive}
-          date={this.state.date}
+          selected={departOrArrive}
+          date={date}
         />
-        <Results schedule={this.state.schedule} />
+        <Results
+          schedule={this.state.schedule}
+          handleOptionChange={(key, abbr) => this.handleOptionChange(key, abbr)}
+          origin={stations[origin]}
+          destination={stations[destination]}
+          date={date}
+          fetching={fetching}
+        />
       </Container>
     );
   }

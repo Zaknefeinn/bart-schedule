@@ -14,19 +14,19 @@ export const SearchContainer = styled.div`
 `;
 export const ResultsContainer = styled.div`
   width: 100%;
-  background: blue;
   display: flex;
   flex-direction: column;
 `;
 export const SearchInfo = styled.div`
   height: 150px;
-  background: green;
+  border-bottom: 1px solid black;
 `;
 export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
+  height: 100%;
   overflow: auto;
-  background: red;
+  background-color: #0076a3;
 `;
 export const Form = styled.form`
   display: flex;
@@ -40,9 +40,27 @@ export const FormRow = styled.div`
 
 export const Card = styled.div`
   flex: 1;
-  border: 1px solid black;
+  display: flex;
+  border-bottom: 1px solid black;
+  background-color: rgba(242, 247, 248, 1);
+  position: relative;
 `;
 
+export const CardTime = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  div {
+    text-align: center;
+  }
+`;
+export const SubCard = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+`;
 //Style Calendar Input
 export const Calendar = styled.div`
   display: flex;
