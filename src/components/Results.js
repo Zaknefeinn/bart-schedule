@@ -25,7 +25,6 @@ class Results extends Component {
 
   render() {
     const results = this.props.schedule.map((trip, index) => {
-      console.log(trip);
       return (
         <Card key={`${index}-${trip['@origTimeMin']}`}>
           {/*Check how many stops and display each leg of the trip */}
