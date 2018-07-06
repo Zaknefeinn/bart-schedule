@@ -2,7 +2,15 @@ import React from 'react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-import { SearchContainer, Form, FormRow, Calendar } from './Styles';
+import {
+  SearchContainer,
+  Form,
+  FormRow,
+  Calendar,
+  Select,
+  SearchInfo,
+  Button
+} from './Styles';
 
 const Search = props => {
   //map through each station and return option for each
@@ -19,9 +27,12 @@ const Search = props => {
   ));
   return (
     <SearchContainer>
+      <SearchInfo>
+        <h2>Plan your trip</h2>
+      </SearchInfo>
       <Form onSubmit={props.handleSubmit}>
         <FormRow>
-          <select
+          <Select
             defaultValue=""
             name="from"
             onChange={key =>
@@ -32,10 +43,10 @@ const Search = props => {
               Departing
             </option>
             {options}
-          </select>
+          </Select>
         </FormRow>
         <FormRow>
-          <select
+          <Select
             defaultValue=""
             name="to"
             onChange={key =>
@@ -46,7 +57,7 @@ const Search = props => {
               Arriving
             </option>
             {options}
-          </select>
+          </Select>
         </FormRow>
         <FormRow>
           <label>
@@ -80,7 +91,7 @@ const Search = props => {
                 props.handleOptionChange('date', moment(date._d))
               }
             />
-            <select
+            <Select
               defaultValue=""
               name="time"
               onChange={key =>
@@ -91,11 +102,11 @@ const Search = props => {
                 Time
               </option>
               {times}
-            </select>
+            </Select>
           </Calendar>
         </FormRow>
         <FormRow>
-          <button type="submit">Get Schedule</button>
+          <Button type="submit">Get Schedule</Button>
         </FormRow>
       </Form>
     </SearchContainer>

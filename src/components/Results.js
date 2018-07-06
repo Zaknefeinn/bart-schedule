@@ -5,9 +5,12 @@ import {
   SearchInfo,
   Card,
   CardTime,
-  SubCard
+  SubCard,
+  SubCardTitle,
+  SubCardContent,
+  Arrow,
+  ArrowContainer
 } from './Styles';
-import Seed from './Seed';
 
 class Results extends Component {
   shouldComponentUpdate(nextProps) {
@@ -19,26 +22,39 @@ class Results extends Component {
       return false;
     }
   }
+
   render() {
     const results = this.props.schedule.map((trip, index) => {
+      console.log(trip);
       return (
-        <Card key={index}>
+        <Card key={`${index}-${trip['@origTimeMin']}`}>
           {/*Check how many stops and display each leg of the trip */}
-          {trip.leg.map(leg => (
-            <SubCard key={leg['@destTimeMin']}>
-              <CardTime>
-                <div>{leg['@origTimeMin']}</div>
-                <div>{leg['@origin']}</div>
-              </CardTime>
-              <CardTime>
-                <div>to</div>
-              </CardTime>
-              <CardTime>
-                <div>{leg['@destTimeMin']}</div>
-                <div>{leg['@destination']}</div>
-              </CardTime>
-            </SubCard>
-          ))}
+          {trip.leg.map((leg, i) => {
+            return (
+              <SubCard key={leg['@destTimeMin']}>
+                <SubCardTitle>
+                  <h3>Train {i + 1}</h3>
+                </SubCardTitle>
+                <SubCardContent>
+                  <CardTime>
+                    <h5>From</h5>
+                    <div>{leg['@origTimeMin']}</div>
+                    <div>{leg['@origin']}</div>
+                  </CardTime>
+                  <ArrowContainer>
+                    <Arrow />
+                    <Arrow />
+                    <Arrow />
+                  </ArrowContainer>
+                  <CardTime>
+                    <h5>To</h5>
+                    <div>{leg['@destTimeMin']}</div>
+                    <div>{leg['@destination']}</div>
+                  </CardTime>
+                </SubCardContent>
+              </SubCard>
+            );
+          })}
         </Card>
       );
     });
@@ -56,7 +72,7 @@ class Results extends Component {
     return (
       <ResultsContainer>
         <SearchInfo>{description}</SearchInfo>
-        <Seed />
+        <CardContainer>{results}</CardContainer>
       </ResultsContainer>
     );
   }
